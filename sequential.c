@@ -51,7 +51,7 @@ int main() {
     end = clock();
 
     for(int i = 1; i < N; i++) {
-	if(arr[i-1] > arr[i]) {
+	if(chunk[i-1] > chunk[i]) {
 		printf("Validation FAILED\n");
 	}	
     }
