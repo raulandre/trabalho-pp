@@ -120,7 +120,7 @@ int main(int argc, char* argv[]) {
 
     if (rank_of_process == 0) {
         for (int i = 1; i < number_of_elements; i++) {
-	    if (data[i - 1] > data[i]) {
+	    if (chunk[i - 1] > chunk[i]) {
 		printf("Validation FAILED\n");
 		MPI_Finalize();
                 return 1;
