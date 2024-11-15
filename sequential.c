@@ -45,12 +45,17 @@ int main() {
         arr[i] = rand() % 10000;
     }
 
+    clock_t start, end;
+    start = clock();
     quickSort(arr, 0, N - 1);
+    end = clock();
 
-    for (int i = 0; i < N; i++) {
-        printf("%d ", arr[i]);
+    for(int i = 1; i < N; i++) {
+	if(arr[i-1] > arr[i]) {
+		printf("Validation FAILED\n");
+	}	
     }
-    printf("\n");
+    printf("Total time = %f secs\n", ((double)(end - start)) / CLOCKS_PER_SEC);
 
     free(arr);
     return 0;

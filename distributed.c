@@ -74,11 +74,6 @@ int main(int argc, char* argv[]) {
         for (int i = 0; i < N; i++) {
             data[i] = rand() % 10000;
         }
-
-        printf("Unsorted array is: \n");
-        for (int i = 0; i < N; i++) {
-            printf("%d ", data[i]);
-        }
         printf("\n");
     }
 
@@ -124,9 +119,12 @@ int main(int argc, char* argv[]) {
     time_taken += MPI_Wtime();
 
     if (rank_of_process == 0) {
-        printf("Sorted array is: \n");
-        for (int i = 0; i < number_of_elements; i++) {
-            printf("%d ", chunk[i]);
+        for (int i = 1; i < number_of_elements; i++) {
+	    if (data[i - 1] > data[i]) {
+		printf("Validation FAILED\n");
+		MPI_Finalize();
+                return 1;
+	    }
         }
         printf("\nQuicksort %d ints on %d procs: %f secs\n", number_of_elements, number_of_process, time_taken);
 

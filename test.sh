@@ -3,7 +3,7 @@
 ./trust-ssh.sh
 
 # Define an array of values for N
-N_values=(1000 10000 100000 500000 1000000 5000000 10000000 50000000)
+N_values=(1000 10000 100000 500000 1000000 5000000 10000000 20000000 30000000)
 
 # Clean and set up results directory
 rm -rf results/
@@ -17,10 +17,10 @@ for N in "${N_values[@]}"; do
 	if [ $? -eq 0 ]; then
 		printf "=============================\n"
 		printf "Running sequential version for N=$N...\n"
-		(time ./seq) 2> results/${N}_seq.txt
+		./seq > results/${N}_seq.txt
 		printf "=============================\n"
 		printf "Running distributed version for N=$N...\n"
-		(time mpirun --mca btl tcp,self --host mpi-node-1,mpi-node-2,mpi-node-3,mpi-node-4 -np 4 ./dist) 1> results/${N}_dist.txt
+		mpirun --mca btl tcp,self --host mpi-node-1,mpi-node-2,mpi-node-3,mpi-node-4 -np 4 ./dist > results/${N}_dist.txt
 		printf "=============================\n"
 	else
 		echo "Build failed for N=$N: $make_out"
