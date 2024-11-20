@@ -70,7 +70,7 @@ int main(int argc, char* argv[]) {
 
     if (rank_of_process == 0) {
         data = (int*)malloc(N * sizeof(int));
-        srand(time(0));
+        srand(1234);
         for (int i = 0; i < N; i++) {
             data[i] = rand() % 10000;
         }
