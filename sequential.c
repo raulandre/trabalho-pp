@@ -40,7 +40,7 @@ int main() {
         return 1;
     }
 
-    srand(time(0));
+    srand(1234);
     for (int i = 0; i < N; i++) {
         arr[i] = rand() % 10000;
     }
